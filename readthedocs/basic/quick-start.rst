@@ -1,49 +1,49 @@
-===========
-Quick-Start
-===========
+=============
+Быстрый старт
+=============
 
-Let's see a longer example to learn some of the methods that the library
-has to offer. These are known as "friendly methods", and you should always
-use these if possible.
+Давайте посмотрим на более подробный пример, чтобы изучить некоторые методы,
+которые библиотека может предложить. Это так называемые
+"удобные методы", и вы всегда должны, по возможности, использовать их.
 
 .. code-block:: python
 
     from telethon import TelegramClient
 
-    # Remember to use your own values from my.telegram.org!
+    # не забудьте взять свои данные из my.telegram.org!
     api_id = 12345
     api_hash = '0123456789abcdef0123456789abcdef'
     client = TelegramClient('anon', api_id, api_hash)
 
     async def main():
-        # Getting information about yourself
+        # Получение информации о себе
         me = await client.get_me()
 
-        # "me" is an User object. You can pretty-print
-        # any Telegram object with the "stringify" method:
+        # "me" - объект пользователя. Вы можете получить красивую информацию
+        #  об объекте Telethon с помощью метода "stringify":
         print(me.stringify())
 
-        # When you print something, you see a representation of it.
-        # You can access all attributes of Telegram objects with
-        # the dot operator. For example, to get the username:
+        # Когда вы что-то выводите, вы видите репрезентацию.
+        # Вы можете получить доступ ко всем атрибутам объектов Telethon с
+        # помощью оператора точки. Например, чтобы получить имя пользователя:
         username = me.username
         print(username)
         print(me.phone)
 
-        # You can print all the dialogs/conversations that you are part of:
+        # Вы можете распечатать все диалоги, в которых вы участвуете:
         async for dialog in client.iter_dialogs():
             print(dialog.name, 'has ID', dialog.id)
 
-        # You can send messages to yourself...
+        # Вы можете отправлять сообщения себе ...
         await client.send_message('me', 'Hello, myself!')
-        # ...to some chat ID
+        # ...к некоторому Chat ID
         await client.send_message(-100123456, 'Hello, group!')
-        # ...to your contacts
+        # ...вашим контактам
         await client.send_message('+34600123123', 'Hello, friend!')
-        # ...or even to any username
+        # ...или даже по имени пользователя
         await client.send_message('username', 'Testing Telethon!')
 
-        # You can, of course, use markdown in your messages:
+        # Конечно, вы можете использовать markdown в своих сообщениях:
         message = await client.send_message(
             'me',
             'This message has **bold**, `code`, __italics__ and '
@@ -51,61 +51,62 @@ use these if possible.
             link_preview=False
         )
 
-        # Sending a message returns the sent message object, which you can use
+        # При отправке сообщения возвращается объект отправленного сообщения,
+        # который вы можете использовать
         print(message.raw_text)
 
-        # You can reply to messages directly if you have a message object
+        # Вы можете отвечать на сообщения напрямую, если у вас есть объект сообщения
         await message.reply('Cool!')
 
-        # Or send files, songs, documents, albums...
+        # Или отправить файлы, песни, документы, альбомы ...
         await client.send_file('me', '/home/me/Pictures/holidays.jpg')
 
-        # You can print the message history of any chat:
+        # Вы можете получить историю сообщений любого чата:
         async for message in client.iter_messages('me'):
             print(message.id, message.text)
 
-            # You can download media from messages, too!
-            # The method will return the path where the file was saved.
+            # Вы также можете загружать медиа из сообщений!
+            # Метод вернет путь, по которому был сохранен файл.
             if message.photo:
                 path = await message.download_media()
-                print('File saved to', path)  # printed after download is done
+                print('File saved to', path)  # выводится после загрузки
 
     with client:
         client.loop.run_until_complete(main())
 
 
-Here, we show how to sign in, get information about yourself, send
-messages, files, getting chats, printing messages, and downloading
-files.
+Здесь вы увидите, как залогинитсья, получить информацию о себе, отправить
+сообщения, файлы, получить чаты, вывести сообщения и загрузить
+файлы.
 
-You should make sure that you understand what the code shown here
-does, take note on how methods are called and used and so on before
-proceeding. We will see all the available methods later on.
+Вы должны убедиться, что понимаете, что делает показанный здесь код,
+обратите внимание на то, как методы вызываются и используются и т. д. до
+продолжения. Позже мы увидим все доступные методы.
 
 .. important::
 
-    Note that Telethon is an asynchronous library, and as such, you should
-    get used to it and learn a bit of basic `asyncio`. This will help a lot.
-    As a quick start, this means you generally want to write all your code
-    inside some ``async def`` like so:
+    Заметьте, что Telethon - это асинхронная библиотека, т.е. вы должны
+    привыкнуть и немного узнать про `asyncio`. Это вам сильно поможет.
+    По-быстрому, это значит, что вы должны писать код внутри ``async def``
+    по типу:
 
-    .. code-block:: python
+.. code-block:: python
 
-        client = ...
+    client = ...
 
-        async def do_something(me):
-            ...
+    async def do_something(me):
+        ...
 
-        async def main():
-            # Most of your code should go here.
-            # You can of course make and use your own async def (do_something).
-            # They only need to be async if they need to await things.
-            me = await client.get_me()
-            await do_something(me)
+    async def main():
+        # Большая часть вашего кода должна быть здесь
+        # Конечно, вы можете создать и использовать свой собственный async def (do_something).
+        # Ему нужно быть асинхронным только в том случае, если ему нужно await (ждать) чего-то.
+        me = await client.get_me()
+        await do_something(me)
 
-        with client:
-            client.loop.run_until_complete(main())
+    with client:
+        client.loop.run_until_complete(main())
 
-    After you understand this, you may use the ``telethon.sync`` hack if you
-    want do so (see :ref:`compatibility-and-convenience`), but note you may
-    run into other issues (iPython, Anaconda, etc. have some issues with it).
+     После того, как вы это поймете, вы можете использовать Telethon.sync (что не очень хорошая идея),
+     (см .: ref: `compatibility-and-comfort`), но учтите, что вы можете столкнуться с другими проблемами
+     (iPython, Anaconda и т. д. имеют некоторые проблемы с этим).

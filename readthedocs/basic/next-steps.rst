@@ -1,22 +1,22 @@
-==========
-Next Steps
-==========
+==============
+Следующие шаги
+==============
 
-These basic first steps should have gotten you started with the library.
+Эти основные первые шаги должны помочь вам начать работу с библиотекой.
 
-By now, you should know how to call friendly methods and how to work with
-the returned objects, how things work inside event handlers, etc.
+Сейчас вы должны знать, как вызывать 'дружнлюбные' методы и как
+работать с возвращенными объектами, как работют обработчики ивентов, и тп.
 
-Next, we will see a quick reference summary of *all* the methods and
-properties that you will need when using the library. If you follow
-the links there, you will expand the documentation for the method
-and property, with more examples on how to use them.
+Далее, мы увидим краткое описание *всех* методов и свойств,
+которые вам понадобятся для использование библиотеки. Если вы
+перейдёте по ссылкам там, вы развернёте документацию по методу
+и свойствам с примерами использования.
 
-Therefore, **you can find an example on every method** of the client
-to learn how to use it, as well as a description of all the arguments.
+Итак, **вы можете найти примеры для каждого метода** (так же как и описание
+всех аргументов) клиента, чтобы узнать, как его использовать.
 
-After that, we will go in-depth with some other important concepts
-that are worth learning and understanding.
+После этого мы углубимся в некоторые другие важные концепции,
+которые стоит изучить и понять.
 
-From now on, you can keep pressing the "Next" button if you want,
-or use the menu on the left, since some pages are quite lengthy.
+С этого момента вы можете продолжать нажимать кнопку "Далее", если хотите,
+или воспользуйтесь меню слева, так как некоторые страницы довольно длинные.

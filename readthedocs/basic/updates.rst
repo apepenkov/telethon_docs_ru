@@ -1,17 +1,18 @@
 =======
-Updates
+События
 =======
 
-Updates are an important topic in a messaging platform like Telegram.
-After all, you want to be notified when a new message arrives, when
-a member joins, when someone starts typing, etc.
-For that, you can use **events**.
+События - важная тема в платформе обмена сообщениями, такой как Telegram.
+В конце концов, вы хотите получать уведомления при получении нового сообщения,
+при входе нового участника, когда кто-то печатает и т.п.
+Для этоко используйте **events**.
 
 .. important::
 
-    It is strongly advised to enable logging when working with events,
-    since exceptions in event handlers are hidden by default. Please
-    add the following snippet to the very top of your file:
+    Советуется использовать logging при работе с событиями,
+    так как ошибки в обработчиках событий спрятаны по умолчанию.
+    Пожалуйста, добавьте следующий фрамент кода на верхнюю строчку
+    вашего файла:
 
     .. code-block:: python
 
@@ -20,10 +21,10 @@ For that, you can use **events**.
                             level=logging.WARNING)
 
 
-Getting Started
-===============
+Начиная
+=======
 
-Let's start things with an example to automate replies:
+Начнем с примера автоматизации ответов:
 
 .. code-block:: python
 
@@ -40,8 +41,8 @@ Let's start things with an example to automate replies:
     client.run_until_disconnected()
 
 
-This code isn't much, but there might be some things unclear.
-Let's break it down:
+Этот код небольшой, но могут быть некоторые неясности.
+Давайте разберемся:
 
 .. code-block:: python
 
@@ -50,18 +51,18 @@ Let's break it down:
     client = TelegramClient('anon', api_id, api_hash)
 
 
-This is normal creation (of course, pass session name, API ID and hash).
-Nothing we don't know already.
+Это обычное создание (конечно, укажите имя сессии, API ID и hash).
+Ничего такого, чего мы еще не знаем.
 
 .. code-block:: python
 
     @client.on(events.NewMessage)
 
 
-This Python decorator will attach itself to the ``my_event_handler``
-definition, and basically means that *on* a `NewMessage
+Этот декоратор Python прикрепится к функции ``my_event_handler``
+и это практически значит *on* a `NewMessage
 <telethon.events.newmessage.NewMessage>` *event*,
-the callback function you're about to define will be called:
+callback-функция, которую вы собираетесь определить, будет названа:
 
 .. code-block:: python
 
@@ -70,26 +71,26 @@ the callback function you're about to define will be called:
             await event.reply('hi!')
 
 
-If a `NewMessage
-<telethon.events.newmessage.NewMessage>` event occurs,
-and ``'hello'`` is in the text of the message, we `reply()
-<telethon.tl.custom.message.Message.reply>` to the event
-with a ``'hi!'`` message.
+Если `NewMessage
+<telethon.events.newmessage.NewMessage>` событие происходит,
+и ``'hello'`` - это текст сообщения, мы `reply()
+<telethon.tl.custom.message.Message.reply>` событию
+сообщением ``'hi!'``.
 
 .. note::
 
-    Event handlers **must** be ``async def``. After all,
-    Telethon is an asynchronous library based on `asyncio`,
-    which is a safer and often faster approach to threads.
+    Обработчики событий **должны** быть ``async def``. В конце концов,
+    Telethon - это асинхронная библиотека, основанная на `asyncio`,
+    что является более безопасным и часто более быстрым подходом к потокам.
 
-    You **must** ``await`` all method calls that use
-    network requests, which is most of them.
+    Вы **должны** ``await`` все вызовы методов, которые используют
+    сетевые запросы, которых больше всего.
 
 
-More Examples
-=============
+Больше примеров
+===============
 
-Replying to messages with hello is fun, but, can we do more?
+Отвечать на сообщения приветствием - это весело, но можем ли мы сделать больше?
 
 .. code-block:: python
 
@@ -101,16 +102,16 @@ Replying to messages with hello is fun, but, can we do more?
             await client.download_profile_photo(sender)
             await event.respond('Saved your photo {}'.format(sender.username))
 
-We could also get replies. This event filters outgoing messages
-(only those that we send will trigger the method), then we filter
-by the regex ``r'\.save'``, which will match messages starting
-with ``".save"``.
+Мы также можем получать только ответы. Это событие фильтрует исходящие сообщения
+(только те, которые мы отправляем, вызовут метод), затем мы фильтруем
+регулярным выражением ``r'\.save'``, который будет соответствовать сообщениям,
+начинающимся с ``".save"``.
 
-Inside the method, we check whether the event is replying to another message
-or not. If it is, we get the reply message and the sender of that message,
-and download their profile photo.
+Внутри метода мы проверяем, отвечает ли событие на другое сообщение, или нет.
+Если это так, мы получаем ответное сообщение и отправителя этого сообщения,
+и загружаем фото их профиля.
 
-Let's delete messages which contain "heck". We don't allow swearing here.
+Удалим сообщения, которые содержат «heck». У нас не допускается ругань.
 
 .. code-block:: python
 
@@ -119,41 +120,41 @@ Let's delete messages which contain "heck". We don't allow swearing here.
         await event.delete()
 
 
-With the ``r'(?i).*heck'`` regex, we match case-insensitive
-"heck" anywhere in the message. Regex is very powerful and you
-can learn more at https://regexone.com/.
+С помощью регулярного выражения ``r'(?i).*heck'`` мы сравниваем без учета регистра
+"heck" в любом месте сообщения. Регулярные выражения очень мощные, и вы
+можете узгать больше https://regexone.com/.
 
-So far, we have only seen the `NewMessage
-<telethon.events.newmessage.NewMessage>`, but there are many more
-which will be covered later. This is only a small introduction to updates.
+Пока что мы видели только `NewMessage
+<telethon.events.newmessage.NewMessage>`, но куда больше
+будет рассмотрено позже. Это лишь небольшое введение в события.
 
-Entities
+Сущности
 ========
 
-When you need the user or chat where an event occurred, you **must** use
-the following methods:
+Если вам нужен пользователь или чат, где произошло событие, вы **должны**
+использовать следующие методы:
 
 .. code-block:: python
 
     async def handler(event):
-        # Good
+        # Правильно
         chat = await event.get_chat()
         sender = await event.get_sender()
         chat_id = event.chat_id
         sender_id = event.sender_id
 
-        # BAD. Don't do this
+        # НЕ ПРАВИЛЬНО. не делайте так.
         chat = event.chat
         sender = event.sender
         chat_id = event.chat.id
         sender_id = event.sender.id
 
-Events are like messages, but don't have all the information a message has!
-When you manually get a message, it will have all the information it needs.
-When you receive an update about a message, it **won't** have all the
-information, so you have to **use the methods**, not the properties.
+События похожи на сообщения, но не содержат всей информации, которую имеет сообщение!
+Когда вы получаете сообщение вручную, оно будет содержать всю необходимую информацию.
+Когда вы получаете обновление о сообщении, оно **не** будет содержать всю
+информацию, поэтому вам нужно **использовать методы**, а не свойства.
 
-Make sure you understand the code seen here before continuing!
-As a rule of thumb, remember that new message events behave just
-like message objects, so you can do with them everything you can
-do with a message object.
+Прежде чем продолжить, убедитесь, что вы понимаете приведенный здесь код!
+Как правило, помните, что события нового сообщения ведут себя просто
+как объекты сообщений, так что вы можете делать с ними все, что можете
+делать с объектом сообщения.
