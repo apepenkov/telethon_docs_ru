@@ -3,7 +3,7 @@ Telethon documentation, but in Russian [UNOFFCICIAL]
 
 Взято из: https://github.com/LonamiWebs/Telethon
 
-Если Вы хотите поучавствовть - Вперед!
+Если Вы хотите поучавствовать - Вперед!
 # Переведено:
 
 - readthedocs/basic/*
