@@ -1,25 +1,24 @@
-==========
-Philosophy
-==========
+=========
+Философия
+=========
 
 
-The intention of the library is to have an existing MTProto library
-existing with hardly any dependencies (indeed, wherever Python is
-available, you can run this library).
+Цель библиотеки - иметь существующую библиотеку MTProto.
+существующую практически без каких-либо зависимостей
+(действительно, где бы ни был доступен Python, вы можете запустить эту библиотеку).
 
-Being written in Python means that performance will be nowhere close to
-other implementations written in, for instance, Java, C++, Rust, or
-pretty much any other compiled language. However, the library turns out
-to actually be pretty decent for common operations such as sending
-messages, receiving updates, or other scripting. Uploading files may be
-notably slower, but if you would like to contribute, pull requests are
-appreciated!
+Написание на Python означает, что производительность не будет близка к другим
+реализациям, написанным, например, на Java, C ++, Rust или почти на любом
+другом компилируемом языке. Тем не менее, библиотека оказывается довольно
+подходящей для обычных операций, таких как отправка сообщений, получение событий
+или других сценариев. Загрузка файлов может быть заметно медленнее, но
+если вы хотите внести свой вклад, мы будем благодарны за Pool Requests!
 
-If ``libssl`` is available on your system, the library will make use of
-it to speed up some critical parts such as encrypting and decrypting the
-messages. Files will notably be sent and downloaded faster.
+Если в вашей системе доступен ``libssl``, библиотека будет использовать
+его для ускорения некоторых важных частей, таких как шифрование и дешифрование
+сообщений. Файлы будут отправляться и скачиваться быстрее.
 
-The main focus is to keep everything clean and simple, for everyone to
-understand how working with MTProto and Telegram works. Don't be afraid
-to read the source, the code won't bite you! It may prove useful when
-using the library on your own use cases.
+Основное внимание уделяется тому, чтобы все было чисто и просто, чтобы все понимали,
+как работает MTProto и Telegram. Не бойтесь читать исходники, код вас не укусит!
+Это может оказаться полезным при использовании библиотеки в ваших собственных
+целях.

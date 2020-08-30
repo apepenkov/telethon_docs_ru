@@ -1,33 +1,34 @@
-===============================
-Understanding the Type Language
-===============================
+=======================
+Понимание Type Language
+=======================
 
 
 `Telegram's Type Language <https://core.telegram.org/mtproto/TL>`__
-(also known as TL, found on ``.tl`` files) is a concise way to define
-what other programming languages commonly call classes or structs.
+(также извечтен как TL, может быть найден в файлах ``.tl``) - это краткий способ определить
+то, что другие языки программирования обычно называют классами или структурами.
 
-Every definition is written as follows for a Telegram object is defined
-as follows:
+Каждое определение написано следующим образом для объекта Telegram
+определяется следующим образом:
 
-    ``name#id argument_name:argument_type = CommonType``
+    ``имя#id имя_аргумента:тип_аргумента = Тип``
 
-This means that in a single line you know what the ``TLObject`` name is.
-You know it's unique ID, and you know what arguments it has. It really
-isn't that hard to write a generator for generating code to any
-platform!
+Это означает, что из одной строки вы узнаёте, что значит имя ``TLObject``.
+Вы знаете уникальный идентификатор, и знаете, какие у него аргументы.
+На самом деле не так уж и сложно написать генератор для генерации кода
+для любой платформы!
 
-The generated code should also be able to *encode* the ``TLObject`` (let
-this be a request or a type) into bytes, so they can be sent over the
-network. This isn't a big deal either, because you know how the
-``TLObject``\ 's are made, and how the types should be serialized.
+Созданный код должен уметь *кодирывать* ``TLObject``
+The generated code should also be able to *encode* the ``TLObject``
+(пусть это будет запрос или тип) в байты, чтобы они могли быть отправлены
+по сети. Это тоже не сложно, потому что Вы знаете, как ``TLObject``ы
+сделаны, и как типы должны быть сериализованы.
 
-You can either write your own code generator, or use the one this
-library provides, but please be kind and keep some special mention to
-this project for helping you out.
+Вы можете написать свой собственный генератор кода или использовать тот,
+который предоставляет эта библиотека, но, пожалуйста,
+будьте добры и оставьте ссылку на этот проект, так как он помог вам.
 
-This is only a introduction. The ``TL`` language is not *that* easy. But
-it's not that hard either. You're free to sniff the
-``telethon_generator/`` files and learn how to parse other more complex
-lines, such as ``flags`` (to indicate things that may or may not be
-written at all) and ``vector``\ 's.
+Это только введение. Язык ``TL`` не *настолько* простой. Но
+он и не слишком млодный. Вы можете рассматривать файлы в
+``telethon_generator/`` и учиться, как парсить более сложные строки,
+например ``flags`` (чтобы отображать поля, которые могут быть, а могут
+и не быть указаны совсем), и ``vector``ы

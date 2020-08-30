@@ -1,22 +1,22 @@
-============
-Coding Style
-============
+==========
+Стиль кода
+==========
 
 
-Basically, make it **readable**, while keeping the style similar to the
-code of whatever file you're working on.
+По сути, сделайте его **читабельным**, сохранив стиль, похожий на код
+любого файла, над которым вы работаете.
 
-Also note that not everyone has 4K screens for their primary monitors,
-so please try to stick to the 80-columns limit. This makes it easy to
-``git diff`` changes from a terminal before committing changes. If the
-line has to be long, please don't exceed 120 characters.
+Также обратите внимание, что не у всех есть экраны 4K,
+поэтому, пожалуйста, постарайтесь придерживаться ограничения в 80 столбцов.
+Это позволяет легко ``git diff`` изменения из терминала перед коммитом изменений.
+Если строка должна быть длинной, не привышайте 120 символов.
 
-For the commit messages, please make them *explanatory*. Not only
-they're helpful to troubleshoot when certain issues could have been
-introduced, but they're also used to construct the change log once a new
-version is ready.
+Насчёт сообщений при коммите, сделайте их *объяснительными*. Они не только
+помогут в устранении неполадок при определенных ошибках, но и будут
+использоваться для содания списка изменений, когда ноавя версия готова.
 
-If you don't know enough Python, I strongly recommend reading `Dive Into
-Python 3 <http://www.diveintopython3.net/>`__, available online for
-free. For instance, remember to do ``if x is None`` or
-``if x is not None`` instead ``if x == None``!
+Если вы не достаточно знаете Python, я рекоммендую `Dive Into
+Python 3 <http://www.diveintopython3.net/>`__, доступный бесплатно онлайн.
+Нпример, помните, что надо делать ``if x is None`` или ``if x is not None``
+вместо ``if x == None``!
+

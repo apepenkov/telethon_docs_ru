@@ -1,51 +1,52 @@
 =================
-Project Structure
+Структура проекта
 =================
 
 
-Main interface
-==============
+Главный интерфейс
+=================
 
-The library itself is under the ``telethon/`` directory. The
-``__init__.py`` file there exposes the main ``TelegramClient``, a class
-that servers as a nice interface with the most commonly used methods on
-Telegram such as sending messages, retrieving the message history,
-handling updates, etc.
+Сама библиотека находится в папке ``telethon/``. Файл
+``__init__.py`` показывает основной ``TelegramClient``, класс,
+который служит как хороший интерфес для наиболее часто используемых
+методов в Telegram, непример отправка сообщений, получение истории
+сообщений, обработки событий и т.п.
 
-The ``TelegramClient`` inherits from several mixing ``Method`` classes,
-since there are so many methods that having them in a single file would
-make maintenance painful (it was three thousand lines before this separation
-happened!). It's a "god object", but there is only a way to interact with
-Telegram really.
+``TelegramClient`` наследуется от нескольких смешанных классов ``Method``,
+поскольку существует так много методов, то их размещение в одном файле
+сделало бы поддержку сложной (там было 3000 строк до разделения на файлы!)
+Это «божественный объект», но на самом деле это - лишь способ
+взаимодействия с Telegram.
 
-The ``TelegramBaseClient`` is an ABC which will support all of these mixins
-so they can work together nicely. It doesn't even know how to invoke things
-because they need to be resolved with user information first (to work with
-input entities comfortably).
+``TelegramBaseClient`` - это азбука, которая будет поддерживать все эти модули,
+чтобы они могли хорошо работать вместе. Он даже не знает, как вызывать методы,
+потому что они сначала должны быть получены с помощью пользовательской информации
+(для комфортной работы с сущностями).
 
-The client makes use of the ``network/mtprotosender.py``. The
-``MTProtoSender`` is responsible for connecting, reconnecting,
-packing, unpacking, sending and receiving items from the network.
-Basically, the low-level communication with Telegram, and handling
-MTProto-related functions and types such as ``BadSalt``.
+Клиент использует ``network/mtprotosender.py``. ``MTProtoSender``
+ответсвеннен за подключение, пере-подключение, запаковку, распаковку,
+отправку и получение данных из сети.
+По существу, это низкоуровневая коммуникация с Telegram, и обработка
+относящихся к MTProto функций и типов, например ``BadSalt``
 
-The sender makes use of a ``Connection`` class which knows the format in
-which outgoing messages should be sent (how to encode their length and
-their body, if they're further encrypted).
+Отправитель использует класс ``Connection``, который знает формат,
+в котором исходящие запросы должны быть отправлены (как закодировать
+их длину и тело, если далее они должны быть зашифрованны).
 
-Auto-generated code
-===================
+Авто-сгенерированный код
+========================
 
-The files under ``telethon_generator/`` are used to generate the code
-that gets placed under ``telethon/tl/``. The parsers take in files in
-a specific format (such as ``.tl`` for objects and ``.json`` for errors)
-and spit out the generated classes which represent, as Python classes,
-the request and types defined in the ``.tl`` file. It also constructs
-an index so that they can be imported easily.
+Файлы в ``telethon_generator/`` используются, чтобы генерировать код,
+который находится в ``telethon/tl/``. Парсеры принимают файлы в
+особом формате (например ``.tl`` для объектов и ``.json`` для ошибок)
+и выдают сгенерированные в качестве Python классов, запросы и типы,
+определенные в ``.tl`` файле. Также они создают индексы, чтобы
+классы было проще импортировать.
 
-Custom documentation can also be generated to easily navigate through
-the vast amount of items offered by the API.
 
-If you clone the repository, you will have to run ``python setup.py gen``
-in order to generate the code. Installing the library runs the generator
-too, but the mentioned command will just generate code.
+Пользовательская документация также может быть создана для простой
+навигации по большому количеству элементов, предлагаемых API.
+
+Если вы клонируете репозиторий, вам нужно будет запустить ``python setup.py gen``,
+чтобы сгенерировать код. При установке библиотеки также запускается генератор,
+но указанная команда просто сгенерирует код.

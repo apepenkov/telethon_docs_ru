@@ -1,24 +1,24 @@
 =====
-Tests
+Тесты
 =====
 
-Telethon uses `Pytest <https://pytest.org/>`__, for testing, `Tox
-<https://tox.readthedocs.io/en/latest/>`__ for environment setup, and
-`pytest-asyncio <https://pypi.org/project/pytest-asyncio/>`__ and `pytest-cov
-<https://pytest-cov.readthedocs.io/en/latest/>`__ for asyncio and 
-`coverage <https://coverage.readthedocs.io/>`__ integration.
+Telethon использует `Pytest <https://pytest.org/>`__, для тестов, `Tox
+<https://tox.readthedocs.io/en/latest/>`__ для установки окружения, и
+`pytest-asyncio <https://pypi.org/project/pytest-asyncio/>`__ с `pytest-cov
+<https://pytest-cov.readthedocs.io/en/latest/>`__ для asyncio
+`coverage <https://coverage.readthedocs.io/>`__ интеграции.
 
-While reading the full documentation for these is probably a good idea, there
-is a lot to read, so a brief summary of these tools is provided below for
-convienience.
+Хотя чтение полной документации по ним, вероятно, является хорошей идеей,
+там много текса, поэтому для удобства ниже приводится краткое описание этих инструментов.
 
-Brief Introduction to Pytest
-============================
+Краткое введение в Pytest
+=========================
 
-`Pytest <https://pytest.org/>`__ is a tool for discovering and running python
-tests, as well as allowing modular reuse of test setup code using fixtures.
+`Pytest <https://pytest.org/>`__  - это инструмент для обнаружения и запуска тестов Python,
+также он допускает многократное модульное использование кода настройки теста с
+использованием приспособлений.
 
-Most Pytest tests will look something like this::
+Большинство тестов Pytest будут выглядеть примерно так::
 
     from module import my_thing, my_other_thing
 
@@ -29,10 +29,11 @@ Most Pytest tests will look something like this::
     async def test_my_thing(event_loop):
         assert await my_other_thing(loop=event_loop) == 42
 
-Note here:
+Обратите внимание:
 
- 1. The test imports one specific function. The role of unit tests is to test
-    that the implementation of some unit, like a function or class, works.
+ 1. Тест импортирует конкретную функцийю. Цель модульных тестов - тестировать,
+    работает ли реализация модуля, например функции или класса.
+
     It's role is not so much to test that components interact well with each
     other. I/O, such as connecting to remote servers, should be avoided. This
     helps with quickly identifying the source of an error, finding silent
